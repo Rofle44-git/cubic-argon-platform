@@ -27,6 +27,7 @@ var tile_pos;
 onready var death_line:int = get_node("../death_line").position.y;
 onready var level_manager = get_node("../level_manager");
 onready var HUD = get_node("../HUD");
+onready var walk_part:Particles2D = $Walk;
 var alive:bool = true;
 var goal_sequence = false;
 
@@ -58,6 +59,8 @@ func _physics_process(delta:float):
 		if is_on_floor():
 			jump = true;
 			velocity.y = 0;
+		
+		walk_part.emitting = velocity.x > 64 and is_on_floor();
 			
 		if is_on_floor() or is_on_ceiling() or is_on_wall():
 			external_forces = Vector2.ZERO;
@@ -93,7 +96,6 @@ func die(particles:bool=true, trail:bool=false):
 	external_forces = Vector2.ZERO;
 	$Sprite.visible = false;
 	$Trail.visible = trail;
-	$Trail.emitting = trail;
 	$Death1.emitting = particles;
 	$Death2.emitting = particles;
 
