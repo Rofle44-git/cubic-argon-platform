@@ -1,0 +1,126 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/screens_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/option_menu.gd" type="Script" id=2]
+
+[node name="options" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 60
+custom_constants/margin_top = 60
+custom_constants/margin_left = 60
+custom_constants/margin_bottom = 60
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer"]
+margin_left = 60.0
+margin_top = 60.0
+margin_right = 964.0
+margin_bottom = 580.0
+
+[node name="controls" type="Tabs" parent="MarginContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 51.0
+margin_right = -14.0
+margin_bottom = -14.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/controls"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/TabContainer/controls/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 856.0
+margin_bottom = 435.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/controls/MarginContainer/GridContainer"]
+margin_right = 836.0
+margin_bottom = 415.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress vwork in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progresswork in progress work in progress work in progress work in progress work in progress work in progress work in progress work in progress"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="graphics" type="Tabs" parent="MarginContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 51.0
+margin_right = -14.0
+margin_bottom = -14.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/graphics"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/TabContainer/graphics/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 856.0
+margin_bottom = 435.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="audio" type="Tabs" parent="MarginContainer/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 51.0
+margin_right = -14.0
+margin_bottom = -14.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/TabContainer/audio"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/TabContainer/audio/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 856.0
+margin_bottom = 435.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+margin_right = 253.0
+margin_bottom = 69.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+
+[node name="menu" type="Button" parent="MarginContainer2"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 237.0
+margin_bottom = 53.0
+text = "return to menu"

@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/level_manager.gd" type="Script" id=1]
+[ext_resource path="res://screens/pause.tscn" type="PackedScene" id=2]
+[ext_resource path="res://screens/goal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resources/screens_theme.tres" type="Theme" id=4]
+
+[node name="level_manager" type="Node"]
+pause_mode = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Handles events inside levels"
+}
+
+[node name="screens" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Control" type="Control" parent="screens"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="screens/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 240
+custom_constants/margin_top = 24
+custom_constants/margin_left = 240
+custom_constants/margin_bottom = 24
+
+[node name="goal" parent="screens/Control/MarginContainer" instance=ExtResource( 3 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 240.0
+margin_top = 24.0
+margin_right = 784.0
+margin_bottom = 616.0
+
+[node name="pause" parent="screens/Control/MarginContainer" instance=ExtResource( 2 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 240.0
+margin_top = 24.0
+margin_right = 784.0
+margin_bottom = 616.0
+
+[node name="respawn_delay" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true

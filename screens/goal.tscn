@@ -1,0 +1,148 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/screens_theme.tres" type="Theme" id=1]
+[ext_resource path="res://resources/large.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scripts/goal_screen.gd" type="Script" id=4]
+
+[node name="goal" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 1008.0
+margin_bottom = 624.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 984.0
+margin_bottom = 600.0
+custom_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 976.0
+margin_bottom = 35.0
+custom_constants/separation = 8
+
+[node name="level_passed" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+margin_right = 976.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 2 )
+text = "Level Passed"
+align = 1
+valign = 1
+
+[node name="HSeparator0" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+margin_top = 51.0
+margin_right = 976.0
+margin_bottom = 56.0
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 72.0
+margin_right = 976.0
+margin_bottom = 518.0
+size_flags_vertical = 3
+custom_constants/vseparation = 6
+custom_constants/hseparation = 12
+columns = 3
+
+[node name="label0" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_right = 91.0
+margin_bottom = 25.0
+text = "deaths"
+valign = 1
+
+[node name="VSeparator0" type="VSeparator" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 103.0
+margin_right = 108.0
+margin_bottom = 25.0
+
+[node name="deaths" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 120.0
+margin_right = 976.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+text = "30"
+align = 2
+valign = 1
+
+[node name="label1" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_top = 31.0
+margin_right = 91.0
+margin_bottom = 56.0
+text = "time"
+valign = 1
+
+[node name="VSeparator1" type="VSeparator" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 103.0
+margin_top = 31.0
+margin_right = 108.0
+margin_bottom = 56.0
+
+[node name="time" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 120.0
+margin_top = 31.0
+margin_right = 976.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+text = "1530 seconds"
+align = 2
+valign = 1
+
+[node name="label2" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_top = 62.0
+margin_right = 91.0
+margin_bottom = 87.0
+text = "jumps"
+valign = 1
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 103.0
+margin_top = 62.0
+margin_right = 108.0
+margin_bottom = 87.0
+
+[node name="jumps" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+margin_left = 120.0
+margin_top = 62.0
+margin_right = 976.0
+margin_bottom = 87.0
+size_flags_horizontal = 3
+text = "156"
+align = 2
+valign = 1
+
+[node name="HSeparator1" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+margin_top = 534.0
+margin_right = 976.0
+margin_bottom = 539.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 555.0
+margin_right = 976.0
+margin_bottom = 592.0
+size_flags_horizontal = 3
+custom_constants/separation = 16
+
+[node name="menu" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 480.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "<- menu"
+
+[node name="next" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 496.0
+margin_right = 976.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Next->"
