@@ -45,9 +45,7 @@ func input_handler():
 	if alive and not goal_sequence:
 		direction = Input.get_action_strength("right") - Input.get_action_strength("left");
 		if Input.is_action_just_pressed("jump") and jump:
-			emit_signal("jump");
-			jump = false;
-			velocity.y = jump_strength;
+			jump();
 
 func _physics_process(delta:float):
 	if alive and not goal_sequence:
@@ -70,6 +68,11 @@ func _physics_process(delta:float):
 		
 		collision_handler();
 
+func jump() -> void:
+	emit_signal("jump");
+	jump = false;
+	velocity.y = jump_strength;
+	
 func collision_handler():
 	if get_slide_count():
 		collision = get_slide_collision(0);
@@ -85,7 +88,7 @@ func collision_handler():
 					die(true, false);
 				TILE_BUMPER:
 					external_forces += collision.normal * bumper_force;
-			
+
 func death_zone_collision(_body:Node):
 	die(true, false);
 	
@@ -102,6 +105,7 @@ func die(particles:bool=true, trail:bool=false):
 func goal():
 	emit_signal("goal");
 	goal_sequence = true;
+
 
 signal goal
 signal death

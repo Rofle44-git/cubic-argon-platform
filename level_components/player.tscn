@@ -136,3 +136,9 @@ lifetime = 1.2
 local_coords = false
 process_material = SubResource( 8 )
 texture = ExtResource( 3 )
+
+[node name="jump" type="AudioStreamPlayer" parent="."]
+bus = "Player"
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+bus = "Player"

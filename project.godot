@@ -20,6 +20,13 @@ config/icon="res://icon.png"
 window/size/height=640
 window/size/resizable=false
 
+[importer_defaults]
+
+wav={
+"edit/loop_mode": 1,
+"edit/normalize": true
+}
+
 [input]
 
 jump={
