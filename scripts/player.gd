@@ -37,9 +37,7 @@ func _ready():
 	connect("death", level_manager, "respawn");  # warning-ignore:return_value_discarded
 	connect("death", HUD, "death");  # warning-ignore:return_value_discarded
 	connect("jump", HUD, "jump");  # warning-ignore:return_value_discarded
-
-func _enter_tree():
-	if not get_node("../spawn").ignore: position = get_node("../spawn").position;
+	global_position = global.active_checkpoint;
 
 func input_handler():
 	if alive and not goal_sequence:

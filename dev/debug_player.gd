@@ -34,9 +34,8 @@ var goal_sequence = false;
 func _ready():
 	connect("death", HUD, "death");  # warning-ignore:return_value_discarded
 	connect("jump", HUD, "jump");  # warning-ignore:return_value_discarded
-
-func _enter_tree():
-	if not get_node("../spawn").ignore: position = get_node("../spawn").position;
+	
+	global_position = global.active_checkpoint;
 
 func input_handler():
 	if alive and not goal_sequence:
@@ -86,7 +85,7 @@ func death_zone_collision(_body:Node):
 	
 func die(_particles:bool=true, _trail:bool=false):
 	emit_signal("death");
-	position = get_node("../spawn").position;
+	global_position = global.active_checkpoint;
 	velocity = Vector2.ZERO;
 	external_forces = Vector2.ZERO;
 

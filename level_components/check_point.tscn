@@ -1,0 +1,93 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://sprites/checkpoint.svg" type="Texture" id=1]
+[ext_resource path="res://sprites/white_circle.png" type="Texture" id=2]
+[ext_resource path="res://scripts/check_point.gd" type="Script" id=3]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0, 2, 1, 0, 0, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 3.72902, 0, 0, Vector2( 0.175926, 1 ), -0.00876632, -0.00876632, 0, 0, Vector2( 1, 0 ), -3.57136, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 2
+emission_box_extents = Vector3( 32, 0, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, -98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.03
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="Gradient" id=7]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.694805, 1 )
+colors = PoolColorArray( 0, 0, 4, 1, 0, 0, 1, 0.45, 0, 0, 1, 0 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 0 ), 0.0, 5.0, 0, 1, Vector2( 0.2, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -1.25, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+direction = Vector3( 1, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 256.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 64.0
+scale = 0.04
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 8 )
+
+[node name="check_point" type="Area2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="spawn_point" type="Position2D" parent="."]
+position = Vector2( 0, -32 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -32, 0, 0, -128, 32, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 2, 2, 2, 1 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -64 )
+
+[node name="idle" type="Particles2D" parent="."]
+amount = 24
+lifetime = 2.0
+visibility_rect = Rect2( -50, -190, 100, 200 )
+process_material = SubResource( 5 )
+texture = ExtResource( 2 )
+
+[node name="passed" type="Particles2D" parent="."]
+position = Vector2( 0, -32 )
+emitting = false
+amount = 32
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource( 6 )
+texture = ExtResource( 2 )
