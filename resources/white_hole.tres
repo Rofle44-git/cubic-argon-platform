@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform sampler2D curve;
+uniform float strength : hint_range(-1, 1) = 0.5;
+
+void fragment() {
+	vec2 vecToCenter = vec2(0.5, 0.5) - UV;
+	float distToCenter = length(vecToCenter);
+	float curveVal = texture(curve, vec2(distToCenter)).r;
+	vec2 diff = normalize(vecToCenter) *strength *curveVal;
+	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV - diff);
+}"
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0 ), 0.0, -0.232798, 0, 0, Vector2( 0.250246, 1 ), 12.6875, -12.3866, 0, 0, Vector2( 0.5, 0 ), -0.104381, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[resource]
+shader = SubResource( 3 )
+shader_param/strength = -0.5
+shader_param/curve = SubResource( 8 )

@@ -1,11 +1,13 @@
 extends KinematicBody2D
+class_name Player
 
 # Movement
 var totalSpeed:Vector2 = Vector2.ZERO;
 var totalSpeedNormal:Vector2 = totalSpeed.normalized();
-var speed:int = 450;
-var gravity:int = 3500;
-var jump_strength:int = -1400;
+var max_speed:int;
+export(int, 0, 4500) var speed:int = 450;
+export(int, -6400, 6400) var gravity:int = 3500;
+export(int, -9600, 0) var jump_strength:int = -1400;
 var direction:float;
 var velocity:Vector2 = Vector2.ZERO;
 var acceleration:float = 0.3;
@@ -16,6 +18,8 @@ var bumper_force:int = 2500;
 # Tilemap Collision
 const TILE_BLOCK:int = 0;
 const TILE_SPIKE:int = 1;
+const TILE_MEDIUM_SPIKE:int = 8;
+const TILE_BIG_SPIKE:int = 9;
 const TILE_BUMPER:int = 2;
 var collision;
 var collider;
@@ -24,6 +28,7 @@ var tile;
 var tile_pos;
 
 # Other
+onready var camera:Camera2D = $Camera;
 onready var death_line:int = get_node("../death_line").position.y;
 onready var level_manager = get_node("../level_manager");
 onready var HUD = get_node("../HUD");
@@ -38,6 +43,8 @@ func _ready():
 	connect("death", HUD, "death");  # warning-ignore:return_value_discarded
 	connect("jump", HUD, "jump");  # warning-ignore:return_value_discarded
 	global_position = global.active_checkpoint;
+	
+	max_speed = gravity * 2;
 
 func input_handler():
 	if alive and not goal_sequence:
@@ -52,6 +59,7 @@ func _physics_process(delta:float):
 		totalSpeed = move_and_slide((velocity + external_forces), Vector2.UP, false, 4, deg2rad(45.0), false);
 		totalSpeedNormal = totalSpeed.normalized();
 		velocity.y += gravity * delta;
+		if velocity.y > max_speed: velocity.y = max_speed;
 		if is_on_floor():
 			jump = true;
 			velocity.y = 0;
@@ -72,17 +80,19 @@ func _jump() -> void:
 	velocity.y = jump_strength;
 	
 func collision_handler():
-	if get_slide_count():
-		collision = get_slide_collision(0);
+	for col_index in range(get_slide_count()):
+#f
+#	if get_slide_count():
+		collision = get_slide_collision(col_index);
 		collider = collision.collider;
-		
+
 		# Tile collision handler
 		if collider is TileMap:
 			tile_pos = collider.world_to_map(collider.to_local(collision.position))
 			tile = collider.get_cellv(tile_pos)
-			
+
 			match tile:
-				TILE_SPIKE:
+				TILE_SPIKE, TILE_MEDIUM_SPIKE, TILE_BIG_SPIKE:
 					die(true, false);
 				TILE_BUMPER:
 					external_forces += collision.normal * bumper_force;

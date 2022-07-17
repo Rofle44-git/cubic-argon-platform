@@ -34,6 +34,10 @@ func respawn_now():
 	yield(get_tree(), "idle_frame");
 	get_parent().add_child(playerInstance);
 	
+	for node in get_node("../objects").get_children():
+		if node is Line2D:
+			get_node("../player").connect("death", node, "reset_pos");  # warning-ignore:return_value_discarded
+	
 func goal():
 	goal_screen.deaths.text = str(HUD.deaths);
 	goal_screen.time.text = str(HUD.counter.get_readable_time());

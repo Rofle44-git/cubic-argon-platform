@@ -20,6 +20,9 @@ __meta__ = {
 }
 
 [node name="default_background" parent="." instance=ExtResource( 2 )]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="death_line" parent="." instance=ExtResource( 3 )]
 
@@ -69,7 +72,7 @@ show_line = false
 
 [node name="moving_platform2" parent="objects" instance=ExtResource( 11 )]
 position = Vector2( 1344, -2624 )
-points = PoolVector2Array( 0, 0, 0, -576 )
+points = PoolVector2Array( 0, 0, 0, -640 )
 size = 256
 await_player_collision = true
 stop_at_end = true
@@ -82,7 +85,7 @@ await_player_collision = true
 stop_at_end = true
 
 [node name="spawn" parent="." instance=ExtResource( 8 )]
-position = Vector2( 192, -192 )
+position = Vector2( 192, -88 )
 __meta__ = {
 "_editor_description_": "Player Spawnpoint
 Must be child of level",
@@ -90,7 +93,7 @@ Must be child of level",
 }
 
 [node name="player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 192, -192 )
+position = Vector2( 192, -88 )
 
 [node name="goal" parent="." instance=ExtResource( 7 )]
 position = Vector2( 1536, -3904 )

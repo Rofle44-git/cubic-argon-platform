@@ -24,7 +24,6 @@ __meta__ = {
 "_editor_description_": "Moves an attached platform. Make sure the platform is at index 0."
 }
 size = 128
-constant_speed = 192
 
 [node name="platform" type="RigidBody2D" parent="."]
 mode = 3
@@ -50,5 +49,3 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platform/Area2D"]
 shape = SubResource( 2 )
-
-[node name="tween" type="Tween" parent="."]

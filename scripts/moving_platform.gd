@@ -10,7 +10,7 @@ export(bool) var show_corners:bool = true;
 export(bool) var stop_at_end:bool = false;
 export(bool) var connect_ends:bool = false;
 export(float, 0, 1) var weight:float = 0.05;
-export(int, 0, 64) var switch_threshold = 8
+export(int, 0, 640) var switch_threshold = 8
 var moving:bool = true;
 var current_point:int = 0;
 var next_point:int = 1;
@@ -29,7 +29,6 @@ func _ready() -> void:
 	platform.get_child(0).region_rect = Rect2(0, 0, round(size / 128) * 128, 32);
 	platform.get_child(1).shape.extents = Vector2(round(size/ 2 / 64) * 64, 16);
 	platform.get_child(2).get_child(0).shape.extents = Vector2(round(size / 2 / 64) * 64 - 16, 16);
-	width = round(size / 16 / 6) * 16;
 		
 func _physics_process(_delta:float) -> void:
 	if !(stop_at_end and destination_reached):
@@ -80,5 +79,8 @@ func _collision(body:Node) -> void:
 
 func reset_pos() -> void:
 	if reset_on_death:
+		moving = false;
 		platform.position = points[0];
+		current_point = 0;
+		next_point = 1;
 		destination_reached = false;
