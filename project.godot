@@ -19,6 +19,11 @@ config/icon="res://icon.png"
 
 global="*res://global.tscn"
 
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+gdscript/warnings/integer_division=false
+
 [display]
 
 window/size/height=640

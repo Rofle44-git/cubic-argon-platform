@@ -17,6 +17,10 @@ onready var HUD = get_node("../HUD");
 func _ready():
 	respawn_delay.connect("timeout", self, "respawn_now");
 	
+	for node in get_node("../objects").get_children():
+		if node is Line2D:
+			get_node("../player").connect("death", node, "reset_pos");  # warning-ignore:return_value_discarded
+	
 func _unhandled_input(event):
 	if event.is_action_pressed("menu") and not goal_screen.visible:
 		pause();

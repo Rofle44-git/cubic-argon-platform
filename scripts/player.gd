@@ -43,7 +43,7 @@ func input_handler():
 	if alive and not goal_sequence:
 		direction = Input.get_action_strength("right") - Input.get_action_strength("left");
 		if Input.is_action_just_pressed("jump") and jump:
-			jump();
+			_jump();
 
 func _physics_process(delta:float):
 	if alive and not goal_sequence:
@@ -66,7 +66,7 @@ func _physics_process(delta:float):
 		
 		collision_handler();
 
-func jump() -> void:
+func _jump() -> void:
 	emit_signal("jump");
 	jump = false;
 	velocity.y = jump_strength;

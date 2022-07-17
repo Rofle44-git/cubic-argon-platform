@@ -10,6 +10,6 @@ func _ready() -> void:
 	connect("body_entered", self, "activate_spawnpoint");  # warning-ignore:return_value_discarded
 
 func activate_spawnpoint(body:Node) -> void:
-	if not passed:
+	if not passed and !(body is TileMap):
 		global.new_checkpoint(spawn_point.global_position);
 		passed_part.emitting = true;

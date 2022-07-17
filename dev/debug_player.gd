@@ -44,6 +44,9 @@ func input_handler():
 			emit_signal("jump");
 			jump = false;
 			velocity.y = jump_strength;
+			
+		if Input.is_key_pressed(KEY_D):
+			die()
 
 func _physics_process(delta:float):
 	if alive and not goal_sequence:

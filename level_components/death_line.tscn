@@ -4,3 +4,6 @@
 
 [node name="death_line" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "The minimum height the player dies."
+}
