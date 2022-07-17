@@ -74,6 +74,12 @@ script = ExtResource( 2 )
 __meta__ = {
 "_editor_description_": "Playable character"
 }
+jump_strength = -1960
+
+[node name="jump_duration" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.2
+one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.75, 0.75 )

@@ -1,19 +1,18 @@
 extends KinematicBody2D
 class_name Player
 
-# Movement
-var totalSpeed:Vector2 = Vector2.ZERO;
-var totalSpeedNormal:Vector2 = totalSpeed.normalized();
-var max_speed:int;
-export(int, 0, 4500) var speed:int = 450;
-export(int, -6400, 6400) var gravity:int = 3500;
-export(int, -9600, 0) var jump_strength:int = -1400;
+# Controller
 var direction:float;
-var velocity:Vector2 = Vector2.ZERO;
 var acceleration:float = 0.3;
-var jump:bool = true;
-var external_forces:Vector2 = Vector2.ZERO;
-var bumper_force:int = 2500;
+var allow_jump:bool = true;
+var max_speed:int = 5000;
+
+# Movement
+var velocity:Vector2 = Vector2.ZERO;
+var speed:int = 450;
+var gravity:int = 98*34;
+export(int) onready var jump_strength:int = gravity * 26;
+export(float) onready var bumper_force:float = jump_strength * 1.7;
 
 # Tilemap Collision
 const TILE_BLOCK:int = 0;
@@ -35,6 +34,8 @@ onready var HUD = get_node("../HUD");
 onready var walk_part:Particles2D = $Walk;
 var alive:bool = true;
 var goal_sequence = false;
+var totalSpeed:Vector2 = Vector2.ZERO;
+var totalSpeedNormal:Vector2 = totalSpeed.normalized();
 
 
 func _ready():
@@ -43,48 +44,46 @@ func _ready():
 	connect("death", HUD, "death");  # warning-ignore:return_value_discarded
 	connect("jump", HUD, "jump");  # warning-ignore:return_value_discarded
 	global_position = global.active_checkpoint;
-	
-	max_speed = gravity * 2;
 
-func input_handler():
+func _input_handler(delta:float):
 	if alive and not goal_sequence:
 		direction = Input.get_action_strength("right") - Input.get_action_strength("left");
-		if Input.is_action_just_pressed("jump") and jump:
-			_jump();
+		if Input.is_action_pressed("jump") and allow_jump:
+			jump(delta);
 
 func _physics_process(delta:float):
 	if alive and not goal_sequence:
-		input_handler();
-		velocity.x = lerp(velocity.x, direction * speed, acceleration);
-		totalSpeed = move_and_slide((velocity + external_forces), Vector2.UP, false, 4, deg2rad(45.0), false);
-		totalSpeedNormal = totalSpeed.normalized();
-		velocity.y += gravity * delta;
-		if velocity.y > max_speed: velocity.y = max_speed;
-		if is_on_floor():
-			jump = true;
-			velocity.y = 0;
+		_input_handler(delta);
+		velocity.x = lerp(velocity.x, direction * speed, acceleration);  # Accelerate input
 		
-		walk_part.emitting = velocity.x > 64 and is_on_floor();
-			
-		if is_on_floor() or is_on_ceiling() or is_on_wall():
-			external_forces = Vector2.ZERO;
+		velocity.y += gravity * delta;  # Compare gravity and jump
+		if velocity.y < -max_speed: velocity.y = -max_speed;  # Gravity Limit
 		
-		if position.y > death_line:
-			die(false, false);
+		totalSpeed = move_and_slide(velocity, Vector2.UP, false, 4, deg2rad(45.0), false);  # Move
+		totalSpeedNormal = totalSpeed.normalized();  # Get direction
 		
-		collision_handler();
+		_collision_handler(delta);
 
-func _jump() -> void:
+func jump(delta:float) -> void:
 	emit_signal("jump");
-	jump = false;
-	velocity.y = jump_strength;
+	allow_jump = false;
+	velocity.y -= jump_strength * delta;
 	
-func collision_handler():
+func _collision_handler(delta:float) -> void:
+	if position.y > death_line: die();  # If below death line, die
+	
 	for col_index in range(get_slide_count()):
-#f
-#	if get_slide_count():
 		collision = get_slide_collision(col_index);
 		collider = collision.collider;
+
+		if collider is Bumper:
+			velocity.y = -bumper_force * delta;  # Bounce off bumper
+			
+		else:
+			if is_on_floor():
+				velocity.y = 0;  # Land on floor
+				allow_jump = true;  # Allow jump
+				walk_part.emitting = totalSpeed.x > 64;  # Emit walking particle
 
 		# Tile collision handler
 		if collider is TileMap:
@@ -93,24 +92,19 @@ func collision_handler():
 
 			match tile:
 				TILE_SPIKE, TILE_MEDIUM_SPIKE, TILE_BIG_SPIKE:
-					die(true, false);
-				TILE_BUMPER:
-					external_forces += collision.normal * bumper_force;
+					die();
 
-func death_zone_collision(_body:Node):
-	die(true, false);
+func death_zone_collision(_body:Node) -> void:
+	die();
 	
-func die(particles:bool=true, trail:bool=false):
+func die() -> void:
 	emit_signal("death");
 	alive = false;
 	velocity = Vector2.ZERO;
-	external_forces = Vector2.ZERO;
-	$Sprite.visible = false;
-	$Trail.visible = trail;
-	$Death1.emitting = particles;
-	$Death2.emitting = particles;
+	$Sprite.visible = false; $Trail.visible = false;
+	$Death1.emitting = true; $Death2.emitting = true;
 
-func goal():
+func goal() -> void:
 	emit_signal("goal");
 	goal_sequence = true;
 

@@ -1,8 +1,12 @@
 extends Line2D
 
 
-onready var platform:RigidBody2D = get_child(0);
-export(int, 0, 1024) var size:int = 64;
+onready var platform = $platform;
+onready var sprite = $platform/Sprite;
+onready var coll1 = $platform/CollisionShape2D;
+onready var coll2 = $platform/Area2D/CollisionShape2D;
+export(int, 0, 1024) var size:float = 128;
+var snapped_size:float;
 export(bool) var await_player_collision:bool = false;
 export(bool) var reset_on_death = true;
 export(bool) var show_line:bool = true;
@@ -19,16 +23,17 @@ var destination_reached:bool = false;
 
 
 func _ready() -> void:
+	# Settings sizes:
+	sprite.region_rect = Rect2(0, 0, size, 32);
+	coll1.shape.extents = Vector2(size / 2, 16);
+	coll2.shape.extents = Vector2(size / 2 -16, 16);
+	
 	if await_player_collision:
 		$platform/Area2D.connect("body_entered", self, "_collision");  # warning-ignore:return_value_discarded
 	moving = !await_player_collision;
 	platform.position = points[0];
 	if !show_line: self_modulate = Color.from_hsv(0, 0, 0, 0);
 	
-	# Settings sizes:
-	platform.get_child(0).region_rect = Rect2(0, 0, round(size / 128) * 128, 32);
-	platform.get_child(1).shape.extents = Vector2(round(size/ 2 / 64) * 64, 16);
-	platform.get_child(2).get_child(0).shape.extents = Vector2(round(size / 2 / 64) * 64 - 16, 16);
 		
 func _physics_process(_delta:float) -> void:
 	if !(stop_at_end and destination_reached):

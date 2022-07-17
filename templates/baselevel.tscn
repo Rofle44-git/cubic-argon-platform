@@ -1,0 +1,142 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://level_components/Spawn.tscn" type="PackedScene" id=1]
+[ext_resource path="res://level_components/bg/default_background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://level_components/HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://level_components/level_manager.tscn" type="PackedScene" id=4]
+[ext_resource path="res://level_components/goal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://level_components/tilesets/world.tscn" type="PackedScene" id=6]
+[ext_resource path="res://level_components/player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://level_components/death_line.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scripts/moving_platform(tween).gd" type="Script" id=9]
+[ext_resource path="res://sprites/moving_platform.svg" type="Texture" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 64, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 48, 16 )
+
+[node name="baselevel" type="Node2D"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="level_manager" parent="." instance=ExtResource( 4 )]
+
+[node name="default_background" parent="." instance=ExtResource( 2 )]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="death_line" parent="." instance=ExtResource( 8 )]
+
+[node name="goal" parent="." instance=ExtResource( 5 )]
+position = Vector2( 384, 0 )
+
+[node name="spawn" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -64 )
+
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
+[node name="world" parent="." instance=ExtResource( 6 )]
+tile_data = PoolIntArray( -262147, 0, 0, -327671, 0, 0, -196611, 0, 0, -262135, 0, 0, -131075, 0, 0, -196599, 0, 0, -65539, 0, 0, -131063, 0, 0, -3, 0, 0, -65527, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0 )
+
+[node name="decorations" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="checkpoints" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="objects" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="moving_platform" type="Line2D" parent="objects"]
+position = Vector2( 128, -64 )
+points = PoolVector2Array( 0, 0, 0, -192 )
+width = 16.0
+default_color = Color( 1, 1, 1, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 10
+antialiased = true
+script = ExtResource( 9 )
+__meta__ = {
+"_editor_description_": "Moves an attached platform. Make sure the platform is at index 0."
+}
+platform_width = 512
+await_player_collision = true
+reset_on_death = true
+show_line = false
+
+[node name="platform" type="RigidBody2D" parent="objects/moving_platform"]
+mode = 3
+
+[node name="Sprite" type="Sprite" parent="objects/moving_platform/platform"]
+texture = ExtResource( 10 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 128, 32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/moving_platform/platform"]
+shape = SubResource( 1 )
+one_way_collision = true
+one_way_collision_margin = 8.0
+
+[node name="Area2D" type="Area2D" parent="objects/moving_platform/platform"]
+position = Vector2( 0, -32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/moving_platform/platform/Area2D"]
+shape = SubResource( 2 )
+
+[node name="tween" type="Tween" parent="objects/moving_platform"]
+
+[node name="moving_platform2" type="Line2D" parent="objects"]
+position = Vector2( 296, -136 )
+points = PoolVector2Array( 0, 0, 0, -192 )
+width = 16.0
+default_color = Color( 1, 1, 1, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 10
+antialiased = true
+script = ExtResource( 9 )
+__meta__ = {
+"_editor_description_": "Moves an attached platform. Make sure the platform is at index 0."
+}
+
+[node name="platform" type="RigidBody2D" parent="objects/moving_platform2"]
+mode = 3
+
+[node name="Sprite" type="Sprite" parent="objects/moving_platform2/platform"]
+texture = ExtResource( 10 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 128, 32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/moving_platform2/platform"]
+shape = SubResource( 1 )
+one_way_collision = true
+one_way_collision_margin = 8.0
+
+[node name="Area2D" type="Area2D" parent="objects/moving_platform2/platform"]
+position = Vector2( 0, -32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="objects/moving_platform2/platform/Area2D"]
+shape = SubResource( 2 )
+
+[node name="tween" type="Tween" parent="objects/moving_platform2"]
+
+[node name="player" parent="." instance=ExtResource( 7 )]
+position = Vector2( 0, -64 )
+
+[node name="portals" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}

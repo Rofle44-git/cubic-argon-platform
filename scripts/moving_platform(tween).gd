@@ -1,9 +1,13 @@
 extends Line2D
 
 
-onready var platform:RigidBody2D = get_child(0);
+onready var platform:RigidBody2D = $platform;
+onready var sprite:Sprite = $platform/Sprite;
+onready var coll1:CollisionShape2D = $platform/CollisionShape2D;
+onready var coll2:CollisionShape2D = $platform/Area2D/CollisionShape2D;
 onready var tween:Tween = $tween;
-export(int, 0, 1024) var size:int = 64;
+export(int, 0, 1024) var size:float = 128;
+var snapped_size:float = 128;
 export(bool) var await_player_collision:bool = false;
 export(bool) var reset_on_death:bool = false;
 export(int, 0, 1280) var constant_speed:int = 64;
@@ -21,19 +25,22 @@ var destination_reached:bool = false;
 
 
 func _ready() -> void:
+	# Setting sizes:
+	snapped_size = round(size / 64) * 64
+	sprite.region_rect = Rect2(0, 0, snapped_size, 32);
+	coll1.shape.extents = Vector2(snapped_size / 2, 16);
+	coll2.shape.extents = Vector2(snapped_size / 2 -16, 16);
+	
 	if await_player_collision:
 		$platform/Area2D.connect("body_entered", self, "_collision");  # warning-ignore:return_value_discarded
 	
 	moving = !await_player_collision;
 	platform.position = points[0];
-	interpolate();
 	if !show_line: self_modulate = Color.from_hsv(0, 0, 0, 0);
-	
-	# Settings sizes:
-	platform.get_child(0).region_rect = Rect2(0, 0, round(size / 128) * 128, 32);  # warning-ignore:integer_division
-	platform.get_child(1).shape.extents = Vector2(round(size/ 2 / 64) * 64, 16);  # warning-ignore:integer_division
-	platform.get_child(2).get_child(0).shape.extents = Vector2(round(size / 2 / 64) * 64 - 16, 16);  # warning-ignore:integer_division
+
 		
+	interpolate();
+	
 func _physics_process(_delta:float) -> void:
 	if !(stop_at_end and destination_reached):
 		if platform.global_position.distance_to(global_position + points[next_point]) < switch_threshold:

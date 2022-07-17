@@ -12,6 +12,7 @@ __meta__ = {
 }
 
 [node name="control" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0.498039 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1

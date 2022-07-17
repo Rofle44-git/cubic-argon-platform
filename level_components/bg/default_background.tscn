@@ -1,21 +1,30 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://sprites/bg0.svg" type="Texture" id=1]
+[ext_resource path="res://resources/gradient_map.tres" type="Material" id=1]
 [ext_resource path="res://sprites/particles0.svg" type="Texture" id=2]
 [ext_resource path="res://sprites/particles1.png" type="Texture" id=3]
 [ext_resource path="res://sprites/particles2.svg" type="Texture" id=4]
 [ext_resource path="res://sprites/vignette.svg" type="Texture" id=5]
+
+[sub_resource type="OpenSimplexNoise" id=3]
+
+[sub_resource type="NoiseTexture" id=4]
+width = 2048
+height = 1280
+seamless = true
+noise = SubResource( 3 )
 
 [node name="default_background" type="Node2D"]
 
 [node name="BG" type="ParallaxBackground" parent="."]
 
 [node name="BG" type="ParallaxLayer" parent="BG"]
-motion_scale = Vector2( 0, 0 )
+motion_scale = Vector2( 0.18, 0.18 )
+motion_mirroring = Vector2( 2024, 1280 )
 
 [node name="Sprite" type="Sprite" parent="BG/BG"]
-modulate = Color( 0, 0, 0, 1 )
-texture = ExtResource( 1 )
+material = ExtResource( 1 )
+texture = SubResource( 4 )
 
 [node name="Particles0" type="ParallaxLayer" parent="BG"]
 motion_scale = Vector2( 0.42, 0.42 )

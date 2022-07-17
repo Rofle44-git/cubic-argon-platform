@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "StaticBody2D",
+"class": "Bumper",
+"language": "GDScript",
+"path": "res://scripts/Bumper.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://scripts/player.gd"
 } ]
 _global_script_class_icons={
+"Bumper": "",
 "Player": ""
 }
 
@@ -31,6 +37,7 @@ global="*res://global.tscn"
 
 [debug]
 
+gdscript/warnings/narrowing_conversion=false
 gdscript/warnings/return_value_discarded=false
 gdscript/warnings/integer_division=false
 

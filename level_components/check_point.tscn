@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://sprites/checkpoint.svg" type="Texture" id=1]
 [ext_resource path="res://sprites/white_circle.png" type="Texture" id=2]
 [ext_resource path="res://scripts/check_point.gd" type="Script" id=3]
+[ext_resource path="res://sounds/2_checkpoint.wav" type="AudioStream" id=4]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0, 2, 1, 0, 0, 1, 0 )
@@ -62,6 +63,10 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "Objects"
 
 [node name="spawn_point" type="Position2D" parent="."]
 position = Vector2( 0, -32 )

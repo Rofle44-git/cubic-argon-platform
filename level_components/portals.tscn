@@ -55,7 +55,7 @@ bus = "Objects"
 
 [node name="in" type="Sprite" parent="."]
 material = ExtResource( 2 )
-position = Vector2( -128, -1.90735e-06 )
+position = Vector2( -128, 0 )
 scale = Vector2( 0.25, 0.5 )
 texture = ExtResource( 1 )
 __meta__ = {
@@ -78,7 +78,7 @@ copy_mode = 2
 
 [node name="out" type="Sprite" parent="."]
 material = ExtResource( 4 )
-position = Vector2( 128, 5.72205e-06 )
+position = Vector2( 128, 0 )
 scale = Vector2( 0.25, 0.5 )
 texture = ExtResource( 1 )
 __meta__ = {

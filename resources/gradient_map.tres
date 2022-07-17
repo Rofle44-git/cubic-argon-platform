@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[ext_resource path="res://resources/space_grad.tres" type="Gradient" id=1]
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D gradient : hint_black;
+
+void fragment()
+{
+	vec4 input_color = texture(TEXTURE, UV);
+	float grayscale_value = dot(input_color.rgb, vec3(0.299, 0.587, 0.114));
+	vec3 sampled_color = texture(gradient, vec2(grayscale_value, 0.0)).rgb;
+	
+	COLOR.rgb = sampled_color;
+	COLOR.a = input_color.a;
+}"
+
+[sub_resource type="GradientTexture" id=8]
+gradient = ExtResource( 1 )
+
+[resource]
+shader = SubResource( 5 )
+shader_param/gradient = SubResource( 8 )
