@@ -2,17 +2,17 @@ extends KinematicBody2D
 class_name Player
 
 # Controller
+var acceleration:float = 4 / 10;
 var direction:float;
-var acceleration:float = 0.3;
 var allow_jump:bool = true;
 var max_speed:int = 5000;
 
 # Movement
 var velocity:Vector2 = Vector2.ZERO;
-var speed:int = 450;
-var gravity:int = 98*34;
-var jump_strength:int = gravity * 26;
-var bumper_force:float = jump_strength * 1.7;
+var speed:int = 500;
+var gravity:int = 98 * 0.8;
+var jump_strength:int = gravity * 22;
+var bumper_force:float = jump_strength * 1.75;
 
 # Tilemap Collision
 const TILE_BLOCK:int = 0;
@@ -45,31 +45,34 @@ func _ready():
 	connect("jump", HUD, "jump");  # warning-ignore:return_value_discarded
 	global_position = global.active_checkpoint;
 
-func _input_handler(delta:float):
+func _input_handler():
 	if alive and not goal_sequence:
 		direction = Input.get_action_strength("right") - Input.get_action_strength("left");
 		if Input.is_action_pressed("jump") and allow_jump:
-			jump(delta);
+			print("gravity: ", gravity)
+			print("jump_strength: ", jump_strength)
+			print("bumper_force: ", bumper_force)
+			_jump();
 
-func _physics_process(delta:float):
+func _physics_process(_delta:float):
 	if alive and not goal_sequence:
-		_input_handler(delta);
-		velocity.x = lerp(velocity.x, direction * speed, acceleration);  # Accelerate input
+		_input_handler();
+		velocity.x = direction * speed;  # Determine horizontal speed
 		
-		velocity.y += gravity * delta;  # Compare gravity and jump
+		velocity.y += gravity;  # Compare gravity and jump
 		if velocity.y < -max_speed: velocity.y = -max_speed;  # Gravity Limit
 		
 		totalSpeed = move_and_slide(velocity, Vector2.UP, false, 4, deg2rad(45.0), false);  # Move
 		totalSpeedNormal = totalSpeed.normalized();  # Get direction
 		
-		_collision_handler(delta);
+		_collision_handler();
 
-func jump(delta:float) -> void:
+func _jump() -> void:
 	emit_signal("jump");
 	allow_jump = false;
-	velocity.y -= jump_strength * delta;
+	velocity.y -= jump_strength;
 	
-func _collision_handler(delta:float) -> void:
+func _collision_handler() -> void:
 	if position.y > death_line: die();  # If below death line, die
 	
 	for col_index in range(get_slide_count()):
@@ -77,7 +80,8 @@ func _collision_handler(delta:float) -> void:
 		collider = collision.collider;
 
 		if collider is Bumper:
-			velocity.y = -bumper_force * delta;  # Bounce off bumper
+			# TODO fix side collision
+			velocity.y = -bumper_force;  # Bounce off bumper
 			
 		else:
 			if gravity > 0:

@@ -2,8 +2,8 @@
 
 [ext_resource path="res://level_components/objects/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level_components/default_environment.tscn" type="PackedScene" id=2]
-[ext_resource path="res://level_components/death_line.tscn" type="PackedScene" id=3]
-[ext_resource path="res://level_components/objects/Spawn.tscn" type="PackedScene" id=5]
+[ext_resource path="res://level_components/tools/death_line.tscn" type="PackedScene" id=3]
+[ext_resource path="res://level_components/objects/spawn.tscn" type="PackedScene" id=5]
 [ext_resource path="res://level_components/level_manager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://level_components/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://level_components/objects/goal.tscn" type="PackedScene" id=8]

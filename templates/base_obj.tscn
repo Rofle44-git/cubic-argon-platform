@@ -5,6 +5,8 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="spr" type="Sprite" parent="."]
+position = Vector2( 0, -32 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="coll" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -32 )

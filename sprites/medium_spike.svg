@@ -3,12 +3,12 @@
 
 <svg
    width="64"
-   height="192"
-   viewBox="0 0 16.933333 50.800002"
+   height="128"
+   viewBox="0 0 16.933333 33.866668"
    version="1.1"
    id="svg5"
    inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
-   sodipodi:docname="bigger_spike.svg"
+   sodipodi:docname="big_spike.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +25,9 @@
      showgrid="true"
      units="px"
      width="64px"
-     inkscape:zoom="1"
-     inkscape:cx="-252"
-     inkscape:cy="-20"
+     inkscape:zoom="1.84191"
+     inkscape:cx="-104.23962"
+     inkscape:cy="115.64083"
      inkscape:window-width="1920"
      inkscape:window-height="1003"
      inkscape:window-x="0"
@@ -51,7 +51,7 @@
      id="layer1">
     <path
        style="fill:#ff1a1a;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M -7.5000002e-7,50.8 H 16.933333 L 8.4666667,0 Z"
+       d="M -2.5000001e-7,33.866667 H 16.933334 L 8.4666667,0 Z"
        id="path2300"
        sodipodi:nodetypes="cccc" />
   </g>

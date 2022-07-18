@@ -21,7 +21,7 @@ tracks/0/keys = {
 }
 
 [node name="sprite" type="Sprite"]
-scale = Vector2( 1.37864, 1.37864 )
+scale = Vector2( 1.19874, 1.19874 )
 texture = ExtResource( 1 )
 
 [node name="scale" type="AnimationPlayer" parent="."]

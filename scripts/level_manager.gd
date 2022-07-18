@@ -1,7 +1,7 @@
 extends Node
 
 
-var playerScene:PackedScene = preload("res://level_components/player.tscn");
+var playerScene:PackedScene = preload("res://level_components/objects/player.tscn");
 var playerInstance;
 var final_time:int;
 var final_deaths:int;
