@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://sprites/arrow_base.svg" type="Texture" id=1]
-[ext_resource path="res://level_components/decoration/configurable_arrow.gd" type="Script" id=2]
+[ext_resource path="res://scripts/configurable_arrow.gd" type="Script" id=2]
 [ext_resource path="res://sprites/arrow_tip.svg" type="Texture" id=3]
 
 [node name="configurable_arrow" type="Line2D"]
