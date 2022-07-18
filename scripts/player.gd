@@ -11,8 +11,8 @@ var max_speed:int = 5000;
 var velocity:Vector2 = Vector2.ZERO;
 var speed:int = 450;
 var gravity:int = 98*34;
-export(int) onready var jump_strength:int = gravity * 26;
-export(float) onready var bumper_force:float = jump_strength * 1.7;
+var jump_strength:int = gravity * 26;
+var bumper_force:float = jump_strength * 1.7;
 
 # Tilemap Collision
 const TILE_BLOCK:int = 0;
@@ -80,11 +80,17 @@ func _collision_handler(delta:float) -> void:
 			velocity.y = -bumper_force * delta;  # Bounce off bumper
 			
 		else:
-			if is_on_floor():
-				velocity.y = 0;  # Land on floor
-				allow_jump = true;  # Allow jump
-				walk_part.emitting = totalSpeed.x > 64;  # Emit walking particle
-
+			if gravity > 0:
+				if is_on_floor():
+					velocity.y = 0;  # Land on floor
+					allow_jump = true;  # Allow jump
+					walk_part.emitting = totalSpeed.x > 64;  # Emit walking particle
+			else:
+				if is_on_ceiling():
+					velocity.y = 0;  # Land on floor
+					allow_jump = true;  # Allow jump
+					walk_part.emitting = totalSpeed.x > 64;  # Emit walking particle
+					
 		# Tile collision handler
 		if collider is TileMap:
 			tile_pos = collider.world_to_map(collider.to_local(collision.position))
@@ -103,6 +109,13 @@ func die() -> void:
 	velocity = Vector2.ZERO;
 	$Sprite.visible = false; $Trail.visible = false;
 	$Death1.emitting = true; $Death2.emitting = true;
+
+func reverse_gravity() -> void:
+	gravity = -gravity;
+
+func set_gravity(reversed:bool=false) -> void:
+	if reversed: gravity = -abs(gravity);
+	else: gravity = abs(gravity);
 
 func goal() -> void:
 	emit_signal("goal");
