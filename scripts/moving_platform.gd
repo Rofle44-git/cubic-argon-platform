@@ -78,8 +78,7 @@ func _draw() -> void:
 					draw_circle(corner, 16, Color.white);
 
 func _collision(body:Node) -> void:
-	if !moving and body != platform and !(body is TileMap):
-		print_debug(body)
+	if !moving and body is Player:
 		moving = true;
 
 func reset_pos() -> void:

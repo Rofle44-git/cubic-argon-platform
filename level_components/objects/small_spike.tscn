@@ -1,20 +1,43 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://templates/base_hazard.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/hazard.gd" type="Script" id=1]
 [ext_resource path="res://sprites/small_spike.svg" type="Texture" id=2]
-[ext_resource path="res://level_components/tools/object_effects.tscn" type="PackedScene" id=3]
 
-[node name="small_spike" instance=ExtResource( 1 )]
+[sub_resource type="Animation" id=1]
+resource_name = "def"
+length = 0.45
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.45 ),
+"transitions": PoolRealArray( 4, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.4 ), Vector2( 1, 1.2 ), Vector2( 1, 0.4 ) ]
+}
 
-[node name="spr" parent="." index="0"]
-position = Vector2( 0, 0 )
-scale = Vector2( 1, 0.594922 )
+[node name="small_spike" type="StaticBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="spr" type="Sprite" parent="."]
+position = Vector2( 32, 64 )
+scale = Vector2( 1, 1.19982 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 
-[node name="object_effects" parent="spr" index="0" instance=ExtResource( 3 )]
-autoplay = "scale_y_bounce"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="spr"]
+autoplay = "def"
+anims/def = SubResource( 1 )
 
-[node name="coll" parent="." index="1"]
+[node name="coll" type="CollisionPolygon2D" parent="."]
 visible = false
+position = Vector2( 32, 32 )
 polygon = PoolVector2Array( -32, 32, 0, -32, 32, 32 )

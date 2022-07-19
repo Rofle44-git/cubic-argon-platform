@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cap-gd-logo.svg-189f436a78cb69ff829efe203341d1bd.stex"
+path="res://.import/cap-gd-logo.svg-d79a8cf4258460881e5c6fe2c5179a27.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cap-gd-logo.svg"
-dest_files=[ "res://.import/cap-gd-logo.svg-189f436a78cb69ff829efe203341d1bd.stex" ]
+source_file="res://resources/cap-gd-logo.svg"
+dest_files=[ "res://.import/cap-gd-logo.svg-d79a8cf4258460881e5c6fe2c5179a27.stex" ]
 
 [params]
 

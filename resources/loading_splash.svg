@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1024"
+   height="640"
+   viewBox="0 0 1024 640"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   sodipodi:docname="loading_splash.svg"
+   inkscape:export-filename="loading_splash.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#333333"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#000000"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="0.65186406"
+     inkscape:cx="334.42555"
+     inkscape:cy="217.83683"
+     inkscape:window-width="1920"
+     inkscape:window-height="1003"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid132"
+       spacingx="16"
+       spacingy="16"
+       empspacing="8"
+       empcolor="#00e5e5"
+       empopacity="0.54901961"
+       color="#0099e5"
+       opacity="0.2"
+       originx="0"
+       originy="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <rect
+       x="128"
+       y="256"
+       width="768"
+       height="128"
+       id="rect184" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;stroke:none;stroke-width:16;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:16;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       id="rect4481"
+       width="1024"
+       height="640"
+       x="0"
+       y="0"
+       sodipodi:insensitive="true" />
+    <g
+       id="g4464"
+       transform="translate(176,-32)">
+      <path
+         id="path1847"
+         style="fill:none;stroke:#ffffff;stroke-width:16;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:16;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 0,256 V 384 H 160 V 320 H 96 v 64"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         id="path1965"
+         style="fill:none;stroke:#ffffff;stroke-width:16;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:16;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="M 384,384 V 256 h -32 v 128 h -64 v -64 h 64"
+         sodipodi:nodetypes="ccccccc" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:16;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:16;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         d="m 256,384 h -64 v -64 h 64 V 448 H 416 V 320 h 64 v 128 h 96 V 320 h -64 v 64 h 64"
+         id="path2795"
+         sodipodi:nodetypes="cccccccccccccc" />
+      <rect
+         style="fill:#ffffff;stroke:none;stroke-width:16;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:16;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         id="rect4348"
+         width="16"
+         height="16"
+         x="600"
+         y="376"
+         rx="0"
+         ry="0" />
+      <rect
+         style="fill:#ffffff;stroke:none;stroke-width:16;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:16;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         id="rect4454"
+         width="16"
+         height="16"
+         x="632"
+         y="376"
+         rx="0"
+         ry="0" />
+      <rect
+         style="fill:#ffffff;stroke:none;stroke-width:16;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:16;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         id="rect4456"
+         width="16"
+         height="16"
+         x="664"
+         y="376"
+         rx="0"
+         ry="0" />
+    </g>
+  </g>
+</svg>

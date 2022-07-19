@@ -30,8 +30,6 @@ func _process(_delta:float) -> void:
 func _body_entered(body:Node) -> void:
 	if body is KinematicBody2D:
 		enter_offset = points[0] - body.global_position;
-		print("Enter_offset: ", enter_offset);
-		print("Exit offset: ", Vector2(enter_offset.x * -1, enter_offset.y));
 		sfx_enter.play();
 		body.global_position = port_out.global_position;
 		if show_dark_flash:

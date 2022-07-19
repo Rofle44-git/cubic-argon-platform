@@ -17,12 +17,13 @@ noise = SubResource( 3 )
 [node name="default_background" type="Node2D"]
 
 [node name="BG" type="ParallaxBackground" parent="."]
+layer = -1
 
 [node name="BG" type="ParallaxLayer" parent="BG"]
 motion_scale = Vector2( 0.18, 0.18 )
 motion_mirroring = Vector2( 2024, 1280 )
 
-[node name="Sprite" type="Sprite" parent="BG/BG"]
+[node name="BG0" type="Sprite" parent="BG/BG"]
 material = ExtResource( 1 )
 texture = SubResource( 4 )
 

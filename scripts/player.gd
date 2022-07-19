@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Player
 
 # Controller
+export(int, 1, 4) var player:int = 1;
 var acceleration:float = 4 / 10;
 var direction:float;
 var allow_jump:bool = true;
@@ -39,19 +40,19 @@ var totalSpeedNormal:Vector2 = totalSpeed.normalized();
 
 
 func _ready():
+	match player:
+		1:
+			self_modulate = gb.player_color[player -1];
 	connect("goal", level_manager, "goal");  # warning-ignore:return_value_discarded
 	connect("death", level_manager, "respawn");  # warning-ignore:return_value_discarded
 	connect("death", HUD, "death");  # warning-ignore:return_value_discarded
 	connect("jump", HUD, "jump");  # warning-ignore:return_value_discarded
-	global_position = global.active_checkpoint;
+	global_position = gb.active_checkpoint;
 
 func _input_handler():
 	if alive and not goal_sequence:
-		direction = Input.get_action_strength("right") - Input.get_action_strength("left");
-		if Input.is_action_pressed("jump") and allow_jump:
-			print("gravity: ", gravity)
-			print("jump_strength: ", jump_strength)
-			print("bumper_force: ", bumper_force)
+		direction = Input.get_action_strength("%sright" % player) - Input.get_action_strength("%sleft" % player);
+		if Input.is_action_pressed("%sjump" % player) and allow_jump:
 			_jump();
 
 func _physics_process(_delta:float):
@@ -94,7 +95,10 @@ func _collision_handler() -> void:
 					velocity.y = 0;  # Land on floor
 					allow_jump = true;  # Allow jump
 					walk_part.emitting = totalSpeed.x > 64;  # Emit walking particle
-					
+		
+		if collider is Hazard:
+			die();
+		
 		# Tile collision handler
 		if collider is TileMap:
 			tile_pos = collider.world_to_map(collider.to_local(collision.position))

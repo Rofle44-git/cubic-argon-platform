@@ -85,7 +85,6 @@ func _draw() -> void:
 
 func _collision(body:Node) -> void:
 	if !moving and body is Player:
-		print_debug(body)
 		moving = true;
 		interpolate();
 

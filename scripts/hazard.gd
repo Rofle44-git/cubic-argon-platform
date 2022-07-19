@@ -1,2 +1,2 @@
-extends StaticBody2D
+extends Node
 class_name Hazard

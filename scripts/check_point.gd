@@ -14,5 +14,5 @@ func activate_spawnpoint(body:Node) -> void:
 	if not passed and body is Player:
 		sfx.play();
 		passed = true;
-		global.new_checkpoint(spawn_point.global_position);
+		gb.new_checkpoint(spawn_point.global_position);
 		passed_part.emitting = true;

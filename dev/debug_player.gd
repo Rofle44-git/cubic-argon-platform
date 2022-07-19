@@ -35,7 +35,7 @@ func _ready():
 	connect("death", HUD, "death");  # warning-ignore:return_value_discarded
 	connect("jump", HUD, "jump");  # warning-ignore:return_value_discarded
 	
-	global_position = global.active_checkpoint;
+	global_position = gb.active_checkpoint;
 
 func input_handler():
 	if alive and not goal_sequence:
@@ -88,7 +88,7 @@ func death_zone_collision(_body:Node):
 	
 func die(_particles:bool=true, _trail:bool=false):
 	emit_signal("death");
-	global_position = global.active_checkpoint;
+	global_position = gb.active_checkpoint;
 	velocity = Vector2.ZERO;
 	external_forces = Vector2.ZERO;
 

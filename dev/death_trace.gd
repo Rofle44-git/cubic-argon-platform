@@ -11,8 +11,8 @@ func _ready():
 func death():
 	if traces.size() == max_traces: traces.pop_at(0);
 	traces.append(player.global_position);
-	print("Death at: ", player.global_position)
-	print("Block: ", get_node("../world").world_to_map(player.global_position))
+	print_debug("Death at: ", player.global_position)
+	print_debug("Block: ", get_node("../world").world_to_map(player.global_position))
 	update()
 	
 func _draw():
